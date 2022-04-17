@@ -1,11 +1,15 @@
 import React from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Service = ({ service }) => {
-    const { title, img, detail, price } = service;
+    const { id, title, img, detail, price } = service;
+    const navigate = useNavigate();
+    const navigateToServiceDetail = id => {
+        navigate(`/course/${id}`);
+    }
     return (
         <div>
-
             <Col>
                 <Card>
                     <Card.Img variant="top" src={img} />
@@ -17,7 +21,7 @@ const Service = ({ service }) => {
                         <Card.Text>
                             Price: ${price}
                         </Card.Text>
-                        <Button variant="primary">See Details</Button>
+                        <Button onClick={() => navigateToServiceDetail(id)} variant="primary">See Details</Button>
                     </Card.Body>
                 </Card>
             </Col>

@@ -34,7 +34,7 @@ const Banners = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        style={{ height: "600px" }}
+                        style={{ maxHeight: "600px" }}
                         src={banners[0].img}
                         alt="Football"
                     />
@@ -46,7 +46,7 @@ const Banners = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        style={{ height: "600px" }}
+                        style={{ maxHeight: "600px" }}
                         src={banners[1].img}
                         alt="Football 2"
                     />
@@ -59,7 +59,7 @@ const Banners = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        style={{ height: "600px" }}
+                        style={{ maxHeight: "600px" }}
                         src={banners[2].img}
                         alt="Football 3"
                     />

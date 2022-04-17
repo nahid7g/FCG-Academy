@@ -10,7 +10,7 @@ const Services = () => {
             .then(data => setServices(data))
     }, [])
     return (
-        <div className='my-2 bg-dark text-white py-4'>
+        <div id='services' className='my-2 bg-dark text-white py-4'>
             <Container>
                 <h2 className='text-center'>Services / Courses</h2>
                 <p className='text-center'>You can choose the best course that you need.</p>
