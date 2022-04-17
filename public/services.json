@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "SHORT COURSES",
+        "detail": "Intensive football 5 days a week.",
+        "price": 400,
+        "img": "https://images.pexels.com/photos/8866329/pexels-photo-8866329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+        "id": 2,
+        "title": "FOOTBALL CAPMS",
+        "detail": "FCG have been running football camps.",
+        "price": 400,
+        "img": "https://images.pexels.com/photos/3148452/pexels-photo-3148452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+        "id": 3,
+        "title": "FULL-TIME COURSE",
+        "detail": "Enrolment onto our full-time Programme",
+        "price": 800,
+        "img": "https://images.pexels.com/photos/258395/pexels-photo-258395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+        "id": 4,
+        "title": "FOOTBALL TRIALS",
+        "detail": "Join football trials organised by FCG",
+        "price": 0,
+        "img": "https://images.pexels.com/photos/7188095/pexels-photo-7188095.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+        "id": 5,
+        "title": "DAY STUDENTS",
+        "detail": "Join the academy as Day student.",
+        "price": 20,
+        "img": "https://images.pexels.com/photos/8941620/pexels-photo-8941620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+        "id": 6,
+        "title": "FOOTBALL FACILITIES",
+        "detail": "Explore the FCG Sports complex",
+        "price": 200,
+        "img": "https://images.pexels.com/photos/3459633/pexels-photo-3459633.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    }
+]
