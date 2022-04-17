@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import auth from '../../../Firebase.init';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification } from 'react-firebase-hooks/auth';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
     const nameRef = useRef("");
@@ -41,13 +42,18 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
+                <p className='text-danger'>{error?.message}</p>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
             <p>Already have an Account? <Link className='text-decoration-none' to="/login">Please Login</Link> </p>
-            <div>----------------------Or-----------------------</div>
-            <button className='btn btn-warning'>Login with Google</button>
+            <div className='d-flex align-items-center'>
+                <div style={{ height: "1px" }} className='w-50 bg-primary'></div>
+                <p className='pt-2 px-2'>Or</p>
+                <div style={{ height: "1px" }} className='w-50 bg-primary'></div>
+            </div>
+            <SocialLogin></SocialLogin>
         </Container>
     );
 };

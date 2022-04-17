@@ -1,15 +1,29 @@
 import React, { useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import auth from '../../../Firebase.init';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const emailRef = useRef("");
     const passwordRef = useRef("");
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    // React Firebase Hooks
+    const [signInWithEmailAndPassword, user, error, loading] = useSignInWithEmailAndPassword(auth);
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        console.log(email, password);
+        signInWithEmailAndPassword(email, password)
+        // Clear the inputs
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+    }
+    if (user) {
+        navigate(from, { replace: true });
     }
     return (
         <Container className='w-50 mx-auto my-4 bg-light p-5'>
@@ -32,8 +46,12 @@ const Login = () => {
                 </Button>
             </Form>
             <p>New to FCG Academy? <Link className='text-decoration-none' to="/register">Please Register</Link> </p>
-            <div>----------------------Or-----------------------</div>
-            <button className='btn btn-warning'>Login with Google</button>
+            <div className='d-flex align-items-center'>
+                <div style={{ height: "1px" }} className='w-50 bg-primary'></div>
+                <p className='pt-2 px-2'>Or</p>
+                <div style={{ height: "1px" }} className='w-50 bg-primary'></div>
+            </div>
+            <SocialLogin></SocialLogin>
         </Container>
     );
 };
