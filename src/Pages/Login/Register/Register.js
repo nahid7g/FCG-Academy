@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../Firebase.init';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import Loading from '../../Shared/Loading/Loading';
 
 const Register = () => {
     const [agree, setAgree] = useState(false);
@@ -23,6 +24,9 @@ const Register = () => {
         await createUserWithEmailAndPassword(email, password)
         await updateProfile({ displayName: name });
         navigate("/");
+    }
+    if (loading) {
+        return <Loading></Loading>
     }
     let errorElement;
     if (error) {
@@ -49,7 +53,7 @@ const Register = () => {
                     <Form.Check onClick={() => setAgree(!agree)} type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button disabled={!agree} variant="primary" type="submit">
-                    Submit
+                    Register
                 </Button>
             </Form>
             {errorElement}

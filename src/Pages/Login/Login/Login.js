@@ -3,6 +3,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../../Firebase.init';
+import Loading from '../../Shared/Loading/Loading';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
@@ -21,6 +22,9 @@ const Login = () => {
         // Clear the inputs
         emailRef.current.value = "";
         passwordRef.current.value = "";
+    }
+    if (loading) {
+        return <Loading></Loading>
     }
     if (user) {
         navigate(from, { replace: true });
@@ -46,7 +50,7 @@ const Login = () => {
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Login
                 </Button>
             </Form>
             {errorElement}
