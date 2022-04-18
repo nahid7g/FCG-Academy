@@ -1,26 +1,32 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../Firebase.init';
-import { useCreateUserWithEmailAndPassword, useSendEmailVerification } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
+    const [agree, setAgree] = useState(false);
     const nameRef = useRef("");
     const emailRef = useRef("");
     const passwordRef = useRef("");
+    const navigate = useNavigate();
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     // React Firebase Hooks
-    const [createUserWithEmailAndPassword, error] = useCreateUserWithEmailAndPassword(auth);
-    const handleRegisterSubmit = event => {
+    const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const handleRegisterSubmit = async (event) => {
         event.preventDefault();
         const name = nameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        createUserWithEmailAndPassword(email, password)
-        // Clear the input fields
-        nameRef.current.value = "";
-        emailRef.current.value = "";
-        passwordRef.current.value = "";
+        // Create user
+        await createUserWithEmailAndPassword(email, password)
+        await updateProfile({ displayName: name });
+        navigate("/");
+    }
+    let errorElement;
+    if (error) {
+        errorElement = <p className='text-danger'>Error: {error?.message}</p>
     }
     return (
         <Container className='w-50 mx-auto my-4 bg-light p-5'>
@@ -40,13 +46,13 @@ const Register = () => {
                     <Form.Control type="password" ref={passwordRef} placeholder="Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
+                    <Form.Check onClick={() => setAgree(!agree)} type="checkbox" label="Check me out" />
                 </Form.Group>
-                <p className='text-danger'>{error?.message}</p>
-                <Button variant="primary" type="submit">
+                <Button disabled={!agree} variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
+            {errorElement}
             <p>Already have an Account? <Link className='text-decoration-none' to="/login">Please Login</Link> </p>
             <div className='d-flex align-items-center'>
                 <div style={{ height: "1px" }} className='w-50 bg-primary'></div>

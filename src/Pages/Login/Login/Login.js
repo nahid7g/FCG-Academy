@@ -12,7 +12,7 @@ const Login = () => {
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
     // React Firebase Hooks
-    const [signInWithEmailAndPassword, user, error, loading] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
     const handleFormSubmit = (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
@@ -24,6 +24,10 @@ const Login = () => {
     }
     if (user) {
         navigate(from, { replace: true });
+    }
+    let errorElement;
+    if (error) {
+        errorElement = <p className='text-danger'>Errror: {error?.message}</p>
     }
     return (
         <Container className='w-50 mx-auto my-4 bg-light p-5'>
@@ -45,6 +49,7 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
+            {errorElement}
             <p>New to FCG Academy? <Link className='text-decoration-none' to="/register">Please Register</Link> </p>
             <div className='d-flex align-items-center'>
                 <div style={{ height: "1px" }} className='w-50 bg-primary'></div>
